@@ -1,0 +1,170 @@
+<!--Autor: bjesua -->
+<!-- mail: bjesua@gmail.com -->
+<!-- year: 2017-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .ta td {
+            width: 100px;
+            height: 30px;
+            text-align: center;
+            vertical-align: middle;
+            background-color: white;
+            border: 1px solid black;
+        }
+
+        .ta td.highlighted {
+            background-color: #38B6E8;
+        }
+
+        .horasP td {
+            width: 100px;
+            height: 30px;
+            text-align: center;
+            vertical-align: middle;
+            background-color: white;
+            border: 0px;
+        }
+
+        .diasP td {
+            width: 100px;
+            height: 30px;
+            text-align: center;
+            vertical-align: middle;
+            background-color: white;
+            border: 0px;
+        }
+
+    </style>
+
+
+
+</head>
+<body>
+
+
+<table>
+    <tr>
+        <td></td>
+        <td>
+
+            <table class="horasP">
+                <tr>
+                    <td>00</td>
+                    <td>01</td>
+                    <td>02</td>
+                    <td>03</td>
+                    <td>04</td>
+                    <td>05</td>
+                    <td>06</td>
+                    <td>07</td>
+                    <td>08</td>
+                    <td>09</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+                    <td>18</td>
+                    <td>19</td>
+                    <td>20</td>
+                    <td>21</td>
+                    <td>22</td>
+                    <td>23</td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <!-- dias -->
+            <table class="diasP">
+                <tr>
+                    <td>Domingo</td>
+                </tr>
+                <tr>
+                    <td>Lunes</td>
+                </tr>
+                <tr>
+                    <td>Martes</td>
+                </tr>
+                <tr>
+                    <td>Miercoles</td>
+                </tr>
+                <tr>
+                    <td>Jueves</td>
+                </tr>
+                <tr>
+                    <td>Viernes</td>
+                </tr>
+                <tr>
+                    <td>Sábado</td>
+                </tr>
+            </table>
+            <!-- fin dias -->
+        </td>
+        <td>
+
+            <div id="selects"></div>
+
+        </td>
+    </tr>
+</table>
+
+
+
+
+</body>
+
+<script src="jquery.min.js"></script>
+<script type="text/javascript">
+    var hL = "";
+    for (var i = 0; i <= 6; i++) {
+        hL += '<table class="ta" id="our_table">';
+        hL += '<tr id="tab' + i + '">';
+        for (var e = 0; e <= 23; e++) {
+            hL += '<td id="id' + i + "-" + e + '"></td>';
+        }
+        hL += '</tr>';
+        hL += '</table>';
+
+    }
+    $("#selects").html(hL);
+    $(function() {
+        var isMouseDown = false,
+            isHighlighted;
+        $("#our_table td")
+            .mousedown(function() {
+                isMouseDown = true;
+                $(this).toggleClass("highlighted");
+                isHighlighted = $(this).hasClass("highlighted");
+                return false; // prevent text selection
+            })
+            .mouseover(function() {
+                if (isMouseDown) {
+                    $(this).toggleClass("highlighted", isHighlighted);
+                }
+            });
+
+        $(document)
+            .mouseup(function() {
+                isMouseDown = false;
+                var arr = {};
+                var idArray = [];
+                $('.highlighted').each(function() {
+                    idArray.push(this.id);
+                });
+                console.log(idArray);
+            });
+    });
+</script>
+
+</html>
